@@ -4,6 +4,7 @@ from django.contrib import messages
 from math import ceil
 import razorpay
 from django.conf import settings
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -34,8 +35,17 @@ def contact(request):
         pnumber=request.POST.get("pnumber")
         myquery=Contact(name=name,email=email,desc=desc,phonenumber=pnumber)
         myquery.save()
-        messages.info(request,"we will get back to you soon..")
-        return render(request,"contact.html")
+        
+        send_mail(
+            name+"->"+pnumber,
+            desc,
+            email,
+            ["djangowork97@gmail.com"],
+            fail_silently=False,
+        )
+        
+        messages.success(request,"we will get back to you soon..")
+        return redirect('/')
 
 
     return render(request,"contact.html")
@@ -47,7 +57,7 @@ def profile(request):
         messages.warning(request,"Login & Try Again")
         return redirect('/auth/login')
     currentuser=request.user.username
-    items=Orders.objects.filter(email=currentuser)
+    items=Orders.objects.filter(name=currentuser)
     rid=""
     for i in items:
         print(i.oid)
@@ -101,8 +111,8 @@ def checkout(request):
         context= {"payment" : payment}
         print('passing context')
         messages.success(request, 'your payment added successfully order will be delivered soon go to home:)', payment['id'])
-        return render(request, 'checkout.html', context)
-        
+        # return render(request, 'checkout.html', context)
+        return redirect('/')
         
     return render(request, 'checkout.html')
 
