@@ -5,6 +5,7 @@ from math import ceil
 import razorpay
 from django.conf import settings
 from django.core.mail import send_mail
+from django.template import RequestContext
 
 # Create your views here.
 
@@ -112,7 +113,9 @@ def checkout(request):
         print('passing context')
         messages.success(request, 'your payment added successfully order will be delivered soon go to home:)', payment['id'])
         # return render(request, 'checkout.html', context)
-        return redirect('/')
+        # return redirect('/')
+        return render('index.html', RequestContext(request))
+
         
     return render(request, 'checkout.html')
 
