@@ -8,6 +8,5 @@ urlpatterns = [
     path('contact/', views.contact, name= "contact"),
     
     path('profile/',views.profile,name="profile"),
-    path('checkout/', views.checkout, name="Checkout"),
-    # path('handlerequest/', views.handlerequest, name="HandleRequest"),
+    # path('checkout/', views.checkout, name="Checkout"),
 ]

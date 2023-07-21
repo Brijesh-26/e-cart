@@ -65,45 +65,45 @@ def profile(request):
     return render(request,"profile.html",context)
 
 
-def checkout(request):
-    if not request.user.is_authenticated:
-        messages.warning(request,"Login & Try Again")
-        return redirect('/accounts/login')
+# def checkout(request):
+#     if not request.user.is_authenticated:
+#         messages.warning(request,"Login & Try Again")
+#         return redirect('/accounts/login')
 
-    if request.method=="POST":
-        items_json = request.POST.get('itemsJson', '')
-        name = request.POST.get('name', '')
-        amount = request.POST.get('amt')
-        email = request.POST.get('email', '')
-        address1 = request.POST.get('address1', '')
-        address2 = request.POST.get('address2','')
-        city = request.POST.get('city', '')
-        state = request.POST.get('state', '')
-        zip_code = request.POST.get('zip_code', '')
-        phone = request.POST.get('phone', '')
-        print('basic code completed')
+#     if request.method=="POST":
+#         items_json = request.POST.get('itemsJson', '')
+#         name = request.POST.get('name', '')
+#         amount = request.POST.get('amt')
+#         email = request.POST.get('email', '')
+#         address1 = request.POST.get('address1', '')
+#         address2 = request.POST.get('address2','')
+#         city = request.POST.get('city', '')
+#         state = request.POST.get('state', '')
+#         zip_code = request.POST.get('zip_code', '')
+#         phone = request.POST.get('phone', '')
+#         print('basic code completed')
         
-        # thank = True
-        print('************client called*****************')
-        client= razorpay.Client(auth=(settings.KEY, settings.SECRET))
-        print('**************creating payment********************')
-        payment= client.order.create({'amount': amount*100, 'currency': 'INR', 'payment_capture' : 1})
-        print('payment created')
-        Order = Orders(items_json=items_json,name=name,amount=int(amount)*100, email=email, address1=address1,address2=address2,city=city,state=state,zip_code=zip_code,phone=phone, razor_pay_order_id= payment['id'])
-        print(type(amount))
-        Order.save()
-        update = OrderUpdate(order_id=Order.order_id,update_desc="the order has been placed")
-        update.save()
-        print('*************************************')
-        print(payment)
-        print('*************************************')
-        print(type(payment['amount']))
-        context= {"payment" : payment}
-        print('passing context')
-        messages.success(request, 'your payment added successfully order will be delivered soon go to home:)', payment['id'])
-        return render(request, 'checkout.html', context)
+#         # thank = True
+#         print('************client called*****************')
+#         client= razorpay.Client(auth=(settings.KEY, settings.SECRET))
+#         print('**************creating payment********************')
+#         payment= client.order.create({'amount': amount*100, 'currency': 'INR', 'payment_capture' : 1})
+#         print('payment created')
+#         Order = Orders(items_json=items_json,name=name,amount=int(amount)*100, email=email, address1=address1,address2=address2,city=city,state=state,zip_code=zip_code,phone=phone, razor_pay_order_id= payment['id'])
+#         print(type(amount))
+#         Order.save()
+#         update = OrderUpdate(order_id=Order.order_id,update_desc="the order has been placed")
+#         update.save()
+#         print('*************************************')
+#         print(payment)
+#         print('*************************************')
+#         print(type(payment['amount']))
+#         context= {"payment" : payment}
+#         print('passing context')
+#         messages.success(request, 'your payment added successfully order will be delivered soon go to home:)', payment['id'])
+#         return render(request, 'checkout.html', context)
         
         
-    return render(request, 'checkout.html')
+#     return render(request, 'checkout.html')
 
     
