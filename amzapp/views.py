@@ -6,7 +6,7 @@ import razorpay
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template import RequestContext
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect , csrf_exempt
 
 # Create your views here.
 
@@ -76,7 +76,7 @@ def profile(request):
     # print(currentuser)
     return render(request,"profile.html",context)
 
-@csrf_protect
+@csrf_exempt
 def checkout(request):
     if not request.user.is_authenticated:
         messages.warning(request,"Login & Try Again")

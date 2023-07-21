@@ -1,12 +1,13 @@
 {% extends "base1.html"%}
 
-    {% block content %}
+
+{% block content %}
 
 
     <div class="global-container">
         <div class="card login-form">
         <div class="card-body">
-            <h3 class="card-title text-center">Register in to Django</h3>
+            <h3 class="card-title text-center">Register to Smart Shop</h3>
             <div class="card-text">
                 {% if messages %}
                 
@@ -37,12 +38,11 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" name="password" class="form-control form-control-sm" id="exampleInputPassword1">
                     </div>
-                    <a href="#" style="float:right;font-size:12px;">Forgot password?</a>
 
-                    <button type="submit" class="btn btn-primary btn-block mt-2">Sign in</button>
+                    <button type="submit" class="btn btn-dark btn-block mt-2">Register</button>
                     
                     <div class="sign-up mt-2">
-                        Already have an account? <a href="{% url 'login_attempt'%}">Create One</a>
+                        Already have an account? <a href="{% url 'login_attempt'%}">Log In</a>
                     </div>
                 </form>
             </div>
