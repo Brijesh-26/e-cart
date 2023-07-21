@@ -56,7 +56,8 @@ Check Out
 
             <div class="col my-4">
                 <h2>Step 2 - Enter Address & Other Details:</h2>
-                <form method="post" action="/checkout/">{% csrf_token %}
+                <form method="post" action="/checkout/">
+                    {% csrf_token %}
                     <input type="hidden" name="itemsJson" id="itemsJson">
 
                     <input type="hidden" id="amt" name="amt">
