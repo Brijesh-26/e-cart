@@ -196,7 +196,8 @@ def paymenthandler(request):
         except:
  
             # if we don't find the required parameters in POST data
-            return HttpResponseBadRequest()
+            # return HttpResponseBadRequest()
+            return render(request, 'wrong.html')
     else:
        # if other than POST request is made.
-        return HttpResponseBadRequest()
+        return render(request, 'wrong1.html')
