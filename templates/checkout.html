@@ -117,7 +117,8 @@ Check Out
                         <!-- <button id="rzp-button1" type="submit" class="btn btn-success btn-sm btn-block col-md-4">Place Order</button> -->
 
 
-                        <button id="rzp-button1">Place Order</button>
+                        <button class="btn" id="pay-btn">Place Order</button>
+      </div>
                 </form>
             </div>
         </div>
@@ -125,40 +126,40 @@ Check Out
 
 
         <!-- adding razorpay js part  -->
-
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
+  
 
         <script>
             var options = {
-                "key": "rzp_test_FqIb8Q6xvsqjnq", // Enter the Key ID generated from the Dashboard
-                "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                "currency": "INR",
-                "name": "smart-shop", //your business name
-                "description": "Place Your Order",
-                "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                "callback_url": "https://smart-shop-7ksw.onrender.com/", // will change it
-                "notes": {
-                    "address": "smart-shop, banglore"
-                },
-                "theme": {
-                    "color": "#3399cc"
-                }
+               
+              // Enter the Key ID generated from the Dashboard
+              key: "{{ razorpay_merchant_key }}",
+               
+              // Amount is in currency subunits.
+              // Default currency is INR. Hence,
+              // 50000 refers to 50000 paise
+              amount: "{{ razorpay_amount }}",
+              currency: "{{ currency }}",
+               
+              // Your/store name.
+              name: "Smart Shop",
+               
+              // Pass the `id` obtained in the response of Step 1
+              order_id: "{{ razorpay_order_id }}",
+              callback_url: "{{ callback_url }}",
             };
-            console.log('razorpay intance intiation')
+             
+            // initialise razorpay with the options.
             var rzp1 = new Razorpay(options);
-            console.log('intiation completed')
-            document.getElementById('rzp-button1').onclick = function (e) {
-                console.log('rzp open')
-                rzp1.open();
-                e.preventDefault();
-                console.log('rzp closed')
-            }
-        </script>
-
-
-
-
+             
+            // add event listener to the payment button.
+            document.getElementById("pay-btn").onclick = function (e) {
+              rzp1.open();
+              e.preventDefault();
+            };
+          </script>
+          
+          
         <!-- this js part responsible for bootstrap desgin  -->
         <script src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>

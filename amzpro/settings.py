@@ -28,6 +28,12 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://smart-shop-7ksw.onrender.com/', 
+    'https://www.google.com/',
+    'https://www.instagram.com/'
+    ]
+
 # Application definition
 
 INSTALLED_APPS = [
