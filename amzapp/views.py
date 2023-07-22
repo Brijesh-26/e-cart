@@ -141,7 +141,7 @@ def checkout(request):
         # order id of newly created order.
         razorpay_order_id = razorpay_order['id']
         # callback_url = 'paymenthandler/'
-        callback_url = '/paymenthandler/'
+        callback_url = 'paymenthandler/'
     
         # we need to pass these details to frontend.
         context = {}
