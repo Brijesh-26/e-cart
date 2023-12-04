@@ -348,11 +348,16 @@ h6 {
 
 /*--------------------------------------------------------------
 # Hero Section
+
+{% static '/images/bgg.jpg' %}
 --------------------------------------------------------------*/
+
+
+
 #hero {
   width: 100%;
   height: 90vh;
-  background: url("../../images/bgg.jpg") top center;
+  background: url("{% static '/images/bgg.jpg' %}") top center;
   background-size: cover;
   position: relative;
 }
